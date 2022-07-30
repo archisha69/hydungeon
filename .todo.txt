@@ -1,3 +1,0 @@
-- fix shop
-- update .help [cmd]
-- update help cmd (main embed)
