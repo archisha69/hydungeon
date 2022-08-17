@@ -92,8 +92,7 @@ classes = ["mage", "archer", "berserk", "tank"]
 admins = [706697300872921088, 705462972415213588]
 
 class dungeon(commands.Cog):
-    def __init__(self, client:commands.Bot):
-        self.client = client
+    def __init__(self, client:commands.Bot): self.client = client
 
     def save(self):
         with open("database/userdb.json", "w+") as f: json.dump(userdb, f)
