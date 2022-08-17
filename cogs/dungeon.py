@@ -534,7 +534,7 @@ class dungeon(commands.Cog):
 
     @commands.command(aliases=["hjaelp"])
     async def help(self, ctx, command=None):
-        if command == None: e = discord.Embed(title="help", description="auction, autogrind, gear, dungeon, stats, equip, unequip, setclass, inventory, level, info, slayer, balance", color=discord.Color.random())
+        if command == None: e = discord.Embed(title="help", description="auction, autogrind, gear, dungeon, stats, equip, unequip, setclass, inventory, level, info, slayer, balance, reforge", color=discord.Color.random())
         elif command == "help":
             e = discord.Embed(title="help for command help", description="helps", color=discord.Color.random())
             e.set_footer(text="why tf do you even need help with this command")
@@ -558,9 +558,9 @@ class dungeon(commands.Cog):
         elif command == "talisman": e = discord.Embed(title="help for command talisman", description="opens your talisbag\naliases:\n`talismans`, `talis`\nusage:\n`.talisman [action]`", color=discord.Color.random())
         elif command == "sell": e = discord.Embed(title="help for command sell", description="sell your item(s)\nusage:\n`.sell <item> <quantity>`", color=discord.Color.random())
         elif command == "balance": e = discord.Embed(title="help for command balance", description="shows user's balance\naliases:\n`purse`, `bal`, `coins`\nusage:\n`.balance [user]`", color=discord.Color.random())
+        elif command == "reforge": e = discord.Embed(title="help for command reforge", description="reforges items\nusage:\n`.reforge <item> <reforge>`", color=discord.Color.random())
         # others (info for arguments)
         elif command == "slayertiers": e = discord.Embed(title="slayer tiers", description="`tier` arguments for slayer command\nzombie quest tiers: 1-5\nspider quest tiers: 1-4\nenderman quest tiers: 1-4", color=discord.Color.random())
-        elif command == "reforge": e = discord.Embed(title="reforge", description="reforges items", color=discord.Color.random())
         return await ctx.reply(embed=e)
 
     @commands.command()
