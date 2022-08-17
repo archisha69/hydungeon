@@ -560,6 +560,7 @@ class dungeon(commands.Cog):
         elif command == "balance": e = discord.Embed(title="help for command balance", description="shows user's balance\naliases:\n`purse`, `bal`, `coins`\nusage:\n`.balance [user]`", color=discord.Color.random())
         # others (info for arguments)
         elif command == "slayertiers": e = discord.Embed(title="slayer tiers", description="`tier` arguments for slayer command\nzombie quest tiers: 1-5\nspider quest tiers: 1-4\nenderman quest tiers: 1-4", color=discord.Color.random())
+        elif command == "reforge": e = discord.Embed(title="reforge", description="reforges items", color=discord.Color.random())
         return await ctx.reply(embed=e)
 
     @commands.command()
@@ -749,7 +750,5 @@ class dungeon(commands.Cog):
 
     @commands.command()
     async def reforge(self, ctx, item, reforge=None): ...
-        
-        
 def setup(client:commands.Bot):
     client.add_cog(dungeon(client))
