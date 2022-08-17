@@ -228,8 +228,8 @@ class dungeon(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self): await self.qq()
 
-    @commands.command(name="dungeon", aliases=['d'])
-    async def a(self, ctx, floor, mode="normal"):
+    @commands.command(aliases=['d'])
+    async def dungeon(self, ctx, floor, mode="normal"):
         if floor == "/dx": return await ctx.reply("no mafs")
         floor = int(floor)
         if floor == 0: return await ctx.reply("ok")
@@ -289,15 +289,15 @@ class dungeon(commands.Cog):
         userdb[str(ctx.author.id)][13] = False
         self.save()
 
-    @commands.command(name="selectclass", aliases=["setclass", "class"])
-    async def b(self, ctx, x:str):
+    @commands.command(aliases=["setclass", "class"])
+    async def selectclass(self, ctx, x:str):
         if x.lower() not in classes: raise BadArgument
         userdb[str(ctx.author.id)][2] = x.lower()
         self.save()
         return await ctx.reply(f"you changed your class to {x.lower()}")
 
-    @commands.command(name="stats")
-    async def c(self, ctx, user:discord.User=None):
+    @commands.command()
+    async def stats(self, ctx, user:discord.User=None):
         if user == None: user = ctx.author
         if str(user.id) not in userdb:
             if str(user.id) not in userdb: self.registerUser(user.id)
@@ -312,15 +312,15 @@ class dungeon(commands.Cog):
         e = discord.Embed(title=f"{user}'s stats", description=f"Health: {stats1[4]} ({stats2[4]})\nDefense: {stats1[5]} ({stats2[5]})\nEffective health: {int(self.calculateEffectiveHealth(stats1[4], stats1[5]))} ({int(self.calculateEffectiveHealth(stats2[4], stats2[5]))})\nStrength: {stats1[0]} ({stats2[0]})\nCritical Damage: {stats1[2]} ({stats2[2]})\nIntelligence: {stats1[1]} ({stats2[1]})\nAbility Damage: {stats1[6]} ({stats2[6]})\nEstimated damage: {int(x1)} ({int(x2)})", color=discord.Color.random())
         return await ctx.reply(embed=e)
     
-    @commands.command(name="info")
-    async def d(self, ctx, floor, mode="normal"):
+    @commands.command()
+    async def info(self, ctx, floor, mode="normal"):
         if int(floor) not in list(range(1, 8)): raise BadArgument
         if mode.lower() != "normal" and mode.lower() != "master": raise BadArgument
         e = discord.Embed(title=f"floor {floor} info", description=f"Boss: {bosses[floor][0]}\nBoss health: {bosses[floor][1][0 if mode.lower() == 'normal' else 1]}\nDungeon size: {bosses[floor][2]}\n\n{bosses[floor][3]}", color=discord.Color.random())
         return await ctx.reply(embed=e)
 
-    @commands.command(name="level")
-    async def e(self, ctx, user:discord.User=None):
+    @commands.command()
+    async def level(self, ctx, user:discord.User=None):
         if user == None: user = ctx.author
         if str(user.id) not in userdb: self.registerUser(user.id)
         xp = mxp = axp = txp = bxp = 0
@@ -337,8 +337,8 @@ class dungeon(commands.Cog):
         embed = discord.Embed(title=f"{user}'s level info", description=f"Catacombs level: {userdb[str(user.id)][3][0]} ({userdb[str(user.id)][3][1]}/{xp} {xp1}%)\nMage level: {userdb[str(user.id)][4][0]} ({userdb[str(user.id)][4][1]}/{mxp} {mxp1}%)\nArcher level: {userdb[str(user.id)][5][0]} ({userdb[str(user.id)][5][1]}/{axp} {axp1}%)\nBerserk level: {userdb[str(user.id)][6][0]} ({userdb[str(user.id)][6][1]}/{bxp} {bxp1}%)\nTank level: {userdb[str(user.id)][7][0]} ({userdb[str(user.id)][7][1]}/{txp} {txp1}%)\nClass average: {round((userdb[str(user.id)][4][0]+userdb[str(user.id)][5][0]+userdb[str(user.id)][6][0]+userdb[str(user.id)][7][0])/4, 1)}", color=discord.Color.random())
         return await ctx.reply(embed=embed)
     
-    @commands.command(name="inventory", aliases=["inv"])
-    async def f(self, ctx, user:discord.User=None):
+    @commands.command(aliases=["inventory"])
+    async def inv(self, ctx, user:discord.User=None):
         if user == None: user = ctx.author
         if str(user.id) not in inventory or len(inventory[str(user.id)]) == 0: e = discord.Embed(title=f"{user}'s inventory", description="This user has no items", color=discord.Color.random())
         else:
@@ -347,8 +347,8 @@ class dungeon(commands.Cog):
             e = discord.Embed(title=f"{user}'s inventory", description=x, color=discord.Color.random())
         return await ctx.reply(embed=e)
     
-    @commands.command(name="auction", aliases=["a"])
-    async def g(self, ctx, action:str, item:str=None, price:int=None, t:int=None):
+    @commands.command(aliases=["a"])
+    async def auction(self, ctx, action:str, item:str=None, price:int=None, t:int=None):
         if action == "create":
             if len(list(auctions.keys())) >= 10: return await ctx.reply("the auctions queue is full")
             o = len(list(auctions.keys()))
@@ -424,8 +424,8 @@ class dungeon(commands.Cog):
             return
         else: raise BadArgument
 
-    @commands.command(name="autogrind")
-    async def h(self, ctx, action=None):
+    @commands.command()
+    async def autogrind(self, ctx, action=None):
         if str(ctx.author.id) not in grind: grind[str(ctx.author.id)] = [0, 1, False]
         if action == None:
             if str(ctx.author.id) not in grind or not grind[str(ctx.author.id)][2]: return await ctx.reply("Auto grinding is disabled. Use `.autogrind enable` to enable it")
@@ -451,14 +451,14 @@ class dungeon(commands.Cog):
         else: raise BadArgument
         self.save()
     
-    @commands.command(name="purse", aliases=["balance", "bal", "coins"])
-    async def i(self, ctx, user:discord.User=None):
+    @commands.command(aliases=["balance", "bal", "coins"])
+    async def purse(self, ctx, user:discord.User=None):
         if user == None: user = ctx.author
         if str(user.id) not in userdb: self.registerUser(user.id)
         return await ctx.reply(f"{user} has {userdb[str(user.id)][0]} coins")
 
-    @commands.command(name="equip")
-    async def j(self, ctx, item, cl):
+    @commands.command()
+    async def equip(self, ctx, item, cl):
         if item not in inventory[str(ctx.author.id)]: return await ctx.reply("You don't own this item")
         if cl not in classes: raise BadArgument
         if item.lower() not in baseitems: raise BadArgument
@@ -475,8 +475,8 @@ class dungeon(commands.Cog):
         self.save()
         return await ctx.reply(f"You equipped your {item} to your {cl} gear")
     
-    @commands.command(name="unequip")
-    async def k(self, ctx, item, cl):
+    @commands.command()
+    async def unequip(self, ctx, item, cl):
         q = ["armor", "weapon", "pet"]
         if item not in baseitems: return await ctx.reply("this item does not exist")
         if item != userdb[str(ctx.author.id)][classes.index(cl.lower())+8][q.index(baseitems[item][len(baseitems[item])-1])]: return await ctx.reply("you dont own this item")
@@ -486,8 +486,8 @@ class dungeon(commands.Cog):
         self.save()
         return await ctx.reply(f"You unequipped your {item} from your {cl} gear")
 
-    @commands.command(name="gear", aliases=["getgear"])
-    async def l(self, ctx, user:discord.User=None):
+    @commands.command(aliases=["getgear"])
+    async def gear(self, ctx, user:discord.User=None):
         if user == None: user = ctx.author
         if str(user.id) not in userdb: self.registerUser(user.id)
         q = str()
@@ -498,8 +498,8 @@ class dungeon(commands.Cog):
             q += "\n"
         return await ctx.reply(embed=discord.Embed(title=f"{user}'s gear", description=q, color=discord.Color.random()))
     
-    @commands.command(name="createitem")
-    async def m(self, ctx, name, _type, _str:int=0, cd:int=0, _int:int=0, admg:int=0, dmg:int=0, baseadmg:int=0, hp:int=0, _def:int=0):
+    @commands.command()
+    async def createitem(self, ctx, name, _type, _str:int=0, cd:int=0, _int:int=0, admg:int=0, dmg:int=0, baseadmg:int=0, hp:int=0, _def:int=0):
         if not ctx.author.id == 705462972415213588: return
         if name in baseitems: return await ctx.reply("an item with this name already exists")
         if _type == "weapon": baseitems[name] = [dmg, _str, _int, 0, cd, 0, 0, baseadmg, _type]
@@ -508,8 +508,8 @@ class dungeon(commands.Cog):
         with open("database/baseitems.json", "w+") as f: json.dump(baseitems, f)
         return await ctx.reply(f"created an item with name {name}")
 
-    @commands.command(name="additem")
-    async def n(self, ctx, item, user:discord.User):
+    @commands.command()
+    async def additem(self, ctx, item, user:discord.User):
         if not ctx.author.id == 705462972415213588: return
         if str(user.id) not in inventory: inventory[str(user.id)] = list()
         if len(inventory[str(user.id)]) == 20: return await ctx.reply("the inventory of that user is full")
@@ -524,16 +524,16 @@ class dungeon(commands.Cog):
         self.save()
         return await ctx.reply(f"Added a {item} to {user}'s inventory")
     
-    @commands.command(name="addcoins")
-    async def o(self, ctx, amount:int, user=discord.User):
+    @commands.command()
+    async def addcoins(self, ctx, amount:int, user=discord.User):
         if not ctx.author.id == 705462972415213588: return
         if str(user.id) not in userdb: self.registerUser(user.id)
         userdb[str(user.id)][0] += amount
         self.save()
         return await ctx.reply(f"added {amount} coins to {user}'s profile")
 
-    @commands.command(name="help")
-    async def p(self, ctx, command=None):
+    @commands.command(aliases=["hjaelp"])
+    async def help(self, ctx, command=None):
         if command == None: e = discord.Embed(title="help", description="auction, autogrind, gear, dungeon, stats, equip, unequip, setclass, inventory, level, info, slayer, balance", color=discord.Color.random())
         elif command == "help":
             e = discord.Embed(title="help for command help", description="helps", color=discord.Color.random())
@@ -562,8 +562,8 @@ class dungeon(commands.Cog):
         elif command == "slayertiers": e = discord.Embed(title="slayer tiers", description="`tier` arguments for slayer command\nzombie quest tiers: 1-5\nspider quest tiers: 1-4\nenderman quest tiers: 1-4", color=discord.Color.random())
         return await ctx.reply(embed=e)
 
-    @commands.command(name="shop")
-    async def q(self, ctx, *, item=None):
+    @commands.command()
+    async def shop(self, ctx, *, item=None):
         if item == None:
             qw = dict(sorted(shopitems.items(), key=lambda x:x[1][0]))
             col = discord.Color.random()
@@ -627,8 +627,8 @@ class dungeon(commands.Cog):
             e = discord.Embed(title=f"{string.capwords(item)}", description=f"Type: {shopitems[item.lower()][1]}\n{'Stats:' if len(q) > 0 else ''}\n{q}\n{shopitems[item.lower()][2] if shopitems[item.lower()][2] is not None else ''}", color=discord.Color.random())
             return await ctx.reply(embed=e)
 
-    @commands.command(name="buy")
-    async def r(self, ctx, *, item):
+    @commands.command()
+    async def buy(self, ctx, *, item):
         if item.lower() not in list(shopitems.keys()): return await ctx.reply("This item does not exist, type `.shop` to get the item list")
         if shopitems[item.lower()][0] > userdb[str(ctx.author.id)][0]: return await ctx.reply("You don't have enough money to buy this item")
         if len(inventory[str(ctx.author.id)]) >= 20 and shopitems[item.lower()][1] != "talisman": return await ctx.reply("You don't have enough space in your inventory")
@@ -648,8 +648,8 @@ class dungeon(commands.Cog):
         userdb[str(ctx.author.id)][0] -= int(shopitems[item.lower()][0]*0.97) if hasDiscount else shopitems[item.lower()][0]
         self.save()
     
-    @commands.command(name="talismans", aliases=["talisman", "talis"])
-    async def s(self, ctx, *, action=None):
+    @commands.command(aliases=["talisman", "talis"])
+    async def talismans(self, ctx, *, action=None):
         if action == None:
             if str(ctx.author.id) not in talisbag or len(talisbag[str(ctx.author.id)][0]) == 0: return await ctx.reply("You don't own any talismans")
             q = str()
@@ -666,8 +666,8 @@ class dungeon(commands.Cog):
             self.save()
             return await ctx.reply("You upgraded your talisman bag successfully")
 
-    @commands.command(name="slayer")
-    async def t(self, ctx, quest, tier):
+    @commands.command()
+    async def slayer(self, ctx, quest, tier):
         stats = self.calculateTotalStats(ctx.author.id, False)
         dmg = self.calculateDamage(baseitems[userdb[str(ctx.author.id)][classes.index(userdb[str(ctx.author.id)][2])+8][1]][0], stats[0], stats[2])
         ehp = self.calculateEffectiveHealth(stats[4], stats[5])
@@ -713,22 +713,22 @@ class dungeon(commands.Cog):
         self.save()
         return await ctx.reply(f"Set rng rate of {user.display_name} to {rate}%")
     
-    @commands.command(name="slayerinfo")
-    async def u(self, ctx, quest, tier:str):
+    @commands.command()
+    async def slayerinfo(self, ctx, quest, tier:str):
         if quest.lower() not in list(slayer.keys()): raise BadArgument
         if tier not in slayer[quest.lower()].keys(): raise BadArgument
         e = discord.Embed(title=f"{quest.lower()} tier {tier} info", description=f"Health: {slayer[quest.lower()][tier][1]}\nDamage per second: {slayer[quest.lower()][tier][2]}\nStarting cost: {slayer[quest.lower()][tier][0]}\nxp: {slayer[quest.lower()][tier][3]}", color=discord.Color.random())
         await ctx.reply(embed=e)
 
-    @commands.command(name="slayerlevel")
-    async def v(self, ctx, user:discord.User=None):
+    @commands.command()
+    async def slayerlevel(self, ctx, user:discord.User=None):
         if user == None: user = ctx.author
         if str(user.id) not in userdb: self.registerUser(user.id)
         e = discord.Embed(title=f"{user.display_name}'s slayer levels", description=f"Zombie slayer level: {userdb[str(ctx.author.id)][14][0][0]}\nSpider slayer level:  {userdb[str(ctx.author.id)][14][1][0]}\nEnderman slayer level:  {userdb[str(ctx.author.id)][14][2][0]}", color=discord.Color.random())
         return await ctx.reply(embed=e)
     
-    @commands.command(name="sell")
-    async def w(self, ctx, item, quantity:int=1):
+    @commands.command()
+    async def sell(self, ctx, item, quantity:int=1):
         if item.lower() not in sellitems and item.lower() not in shopitems: return await ctx.reply("This item does not exist")
         if quantity <= 0: raise BadArgument
         inInventory = False
@@ -747,5 +747,7 @@ class dungeon(commands.Cog):
         self.save()
         return await ctx.reply(f"You sold {str(quantity)} {string.capwords(item)}{'s' if quantity > 1 else ''}")
 
+    @commands.command()
+    async def reforge(self, ctx, item, reforge=None): ...
 def setup(client:commands.Bot):
     client.add_cog(dungeon(client))
