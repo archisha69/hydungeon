@@ -1,8 +1,7 @@
 import discord, time
 from discord.ext import commands
 
-client = commands.Bot(command_prefix=".", case_insensitive=True)
-oid = 705462972415213588
+client = commands.Bot(command_prefix=".", case_insensitive=True); oid = 705462972415213588
 
 @client.event
 async def on_ready(): print("o"); await client.change_presence(activity=discord.Game(name=".help", timestamps={"start": time.time()}))
@@ -25,8 +24,7 @@ async def reload(ctx, *, arg1):
         try: client.unload_extension(f'cogs.{arg1}'); client.load_extension(f'cogs.{arg1}'); await ctx.send("Reloaded Cog"); print(f"[log] {ctx.author} reloaded cog."); return
         except Exception as e: await ctx.send(e); print(f"[Cog] An unexpected error has occurred: {e}")
     
-client.load_extension("cogs.dungeon")
-client.load_extension("cogs.e")
+client.load_extension("cogs.dungeon"); client.load_extension("cogs.e")
 client.run("imagine thinking i forgor the token here :skull:")
 
 
