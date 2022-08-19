@@ -21,8 +21,7 @@ class e(commands.Cog):
             except discord.HTTPException: pass       
         if isinstance(error, commands.CommandOnCooldown):
             print(f"{self.gettime()}CommandOnCooldown triggered by {ctx.author} in {ctx.command}")
-            if math.ceil(error.retry_after) < 60:
-                await ctx.reply(f'This command is on cooldown. Please try after {math.ceil(error.retry_after)} seconds')
+            if math.ceil(error.retry_after) < 60: await ctx.reply(f'This command is on cooldown. Please try after {math.ceil(error.retry_after)} seconds')
             elif math.ceil(error.retry_after) < 3600:
                 ret = math.ceil(error.retry_after) / 60
                 await ctx.reply(f'This command is on cooldown. Please try after {math.ceil(ret)} minutes')
