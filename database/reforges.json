@@ -1,0 +1,292 @@
+{
+  "suspicious": {
+    "type": "sword",
+    "common": {
+      "cc": 1,
+      "cd": 30,
+      "cost": 60000
+    },
+    "uncommon": {
+      "cc": 2,
+      "cd": 40,
+      "cost": 125000
+    },
+    "rare": {
+      "cc": 3,
+      "cd": 50,
+      "cost": 250000
+    },
+    "epic": {
+      "cc": 4,
+      "cd": 65,
+      "cost": 650000
+    },
+    "legendary": {
+      "cc": 5,
+      "cd": 85,
+      "cost": 1000000
+    }
+  },
+  "withered": {
+    "type": "sword",
+    "common": {
+      "str": 65,
+      "cost": 10000
+    },
+    "uncommon": {
+      "str": 75,
+      "cost": 20000
+    },
+    "rare": {
+      "str": 90,
+      "cost": 30000
+    },
+    "epic": {
+      "str": 110,
+      "cost": 40000
+    },
+    "legendary": {
+      "str": 135,
+      "cost": 50000
+    }
+  },
+  "fabled": {
+    "type": "sword",
+    "common": {
+      "cd": 15,
+      "str": 30,
+      "cost": 30000
+    },
+    "uncommon": {
+      "cd": 20,
+      "str": 35,
+      "cost": 125000
+    },
+    "rare": {
+      "cd": 25,
+      "str": 40,
+      "cost": 250000
+    },
+    "epic": {
+      "cd": 32,
+      "str": 50,
+      "cost": 500000
+    },
+    "legendary": {
+      "cd": 40,
+      "str": 60,
+      "cost": 1000000
+    }
+  },
+  "ancient": {
+    "type": "armor",
+    "common": {
+      "cc": 3,
+      "def": 7,
+      "int": 6,
+      "str": 4,
+      "hp": 7,
+      "cost": 10000
+    },
+    "uncommon": {
+      "cc": 5,
+      "def": 7,
+      "int": 9,
+      "str": 8,
+      "hp": 7,
+      "cost": 20000
+    },
+    "rare": {
+      "cc": 7,
+      "def": 7,
+      "int": 12,
+      "str": 12,
+      "hp": 7,
+      "cost": 30000
+    },
+    "epic": {
+      "cc": 9,
+      "def": 7,
+      "int": 16,
+      "str": 18,
+      "hp": 7,
+      "cost": 40000
+    },
+    "legendary": {
+      "cc": 12,
+      "def": 7,
+      "int": 20,
+      "str": 25,
+      "hp": 7,
+      "cost": 50000
+    }
+  },
+  "necrotic": {
+    "type": "armor",
+    "common": {
+      "int": 30,
+      "cost": 20000
+    },
+    "uncommon": {
+      "int": 60,
+      "cost": 40000
+    },
+    "rare": {
+      "int": 90,
+      "cost": 80000
+    },
+    "epic": {
+      "int": 120,
+      "cost": 150000
+    },
+    "legendary": {
+      "int": 150,
+      "cost": 300000
+    }
+  },
+  "spiritual": {
+    "type": "bow",
+    "common": {
+      "cc": 7,
+      "cd": 10,
+      "str": 4,
+      "cost": 60000
+    },
+    "uncommon": {
+      "cc": 8,
+      "cd": 15,
+      "str": 8,
+      "cost": 125000
+    },
+    "rare": {
+      "cc": 9,
+      "cd": 23,
+      "str": 14,
+      "cost": 250000
+    },
+    "epic": {
+      "cc": 10,
+      "cd": 37,
+      "str": 20,
+      "cost": 500000
+    },
+    "legendary": {
+      "cc": 12,
+      "cd": 55,
+      "str": 28,
+      "cost": 1000000
+    }
+  },
+  "loving": {
+    "type": "armor",
+    "common": {
+      "def": 4,
+      "int": 20,
+      "hp": 4,
+      "cost": 30000
+    },
+    "uncommon": {
+      "def": 5,
+      "int": 40,
+      "hp": 5,
+      "cost": 75000
+    },
+    "rare": {
+      "def": 6,
+      "int": 60,
+      "hp": 6,
+      "cost": 150000
+    },
+    "epic": {
+      "def": 7,
+      "int": 80,
+      "hp": 8,
+      "cost": 300000
+    },
+    "legendary": {
+      "def": 10,
+      "int": 100,
+      "hp": 10,
+      "cost": 600000
+    }
+  },
+  "giant": {
+    "type": "armor",
+    "common": {
+      "hp": 50,
+      "cost": 60000
+    },
+    "uncommon": {
+      "hp": 60,
+      "cost": 125000
+    },
+    "rare": {
+      "hp": 80,
+      "cost": 250000
+    },
+    "epic": {
+      "hp": 120,
+      "cost": 500000
+    },
+    "legendary": {
+      "hp": 180,
+      "cost": 1000000
+    }
+  },
+  "reinforced": {
+    "type": "armor",
+    "common": {
+      "def": 25,
+      "cost": 2500
+    },
+    "uncommon": {
+      "def": 35,
+      "cost": 5000
+    },
+    "rare": {
+      "def": 50,
+      "cost": 10000
+    },
+    "epic": {
+      "def": 65,
+      "cost": 25000
+    },
+    "legendary": {
+      "def": 80,
+      "cost": 50000
+    }
+  },
+  "precise": {
+    "type": "bow",
+    "common": {
+      "str": 3,
+      "cc": 8,
+      "cd": 5,
+      "cost": 30000
+    },
+    "uncommon": {
+      "str": 7,
+      "cc": 9,
+      "cd": 10,
+      "cost": 75000
+    },
+    "rare": {
+      "str": 12,
+      "cc": 10,
+      "cd": 18,
+      "cost": 150000
+    },
+    "epic": {
+      "str": 18,
+      "cc": 11,
+      "cd": 32,
+      "cost": 300000
+    },
+    "legendary": {
+      "str": 25,
+      "cc": 13,
+      "cd": 50,
+      "cost": 600000
+    }
+  }
+}
